@@ -5,11 +5,12 @@
 rm(list = ls(all = TRUE))
 
 # load packages
-packages <- c('data.table', 'plyr', 'dplyr', 'reshape2', 'stringr', # general
-              'ggplot2', 'lattice', 'lubridate', # plotting and dates
-              'pROC', 'ROCR', # ROC curves
-              'caret', 'randomForest', 'unbalanced' # modeling
-)
+packages <- c(
+  'data.table', 'plyr', 'dplyr', 'reshape2', 'stringr', # general
+  'ggplot2', 'lattice', 'lubridate', # plotting and dates
+  'pROC', 'ROCR', # ROC curves
+  'caret', 'randomForest', 'unbalanced' # modeling
+  )
 lapply(packages, require, character.only = T)
 
 # clean-up
@@ -22,7 +23,7 @@ rm(packages)
 set.seed(1)
 
 # read data
-rawdata <- read.csv("data/churn/churn_fix.csv", header = T)
+rawdata <- read.csv("../data/churn/churn_fix.csv", header = T)
 
 # check data
 str(rawdata)
@@ -36,10 +37,12 @@ data <- rawdata
 # creating a copy for transforming columns to numeric
 num_data <- data
 vars <- colnames(num_data)
-catVars <- vars[sapply(num_data[, vars], class) %in% c('factor','character')]
+catVars <- vars[
+  sapply(num_data[, vars], class) %in% c('factor','character')
+  ]
 for(v in catVars) {
   num_data[, v] <- as.numeric(as.factor(num_data[,v]))
-}
+  }
 
 # correlation data
 cor_data <- melt(cor(num_data))
@@ -65,7 +68,11 @@ rm(num_data, cor_data, catVars, v, vars)
 data$state <- as.character(data$state)
 a <- as.data.frame(table(data$state))
 states_select <- as.vector(a[a$Freq > 65, ][[1]])
-data$state_group <- ifelse(data$state %in% states_select, data$state, "other")
+data$state_group <- ifelse(
+  data$state %in% states_select,
+  data$state,
+  "other"
+  )
 
 state_col <- c("state", "state_group")
 for(v in state_col) {
@@ -84,7 +91,8 @@ rm(a, v, states_select, state_col)
 cols_remove <- c(
   "customer_id", "days_renew", "state", 
   "area_code", "phone", "is_vmail_plan",
-  "day_charge", "eve_charge", "night_charge")
+  "day_charge", "eve_charge", "night_charge"
+  )
 data <- data[, setdiff(colnames(data), cols_remove)]
 
 # clean up
@@ -93,15 +101,23 @@ rm(cols_remove)
 #########################################
 # get average mins per call
 
-data$day_avg_mins <- ifelse(data$day_calls == 0, -1, data$day_mins / data$day_calls)
-data$eve_avg_mins <- ifelse(data$eve_calls == 0, -1, data$eve_mins / data$eve_calls)
-data$night_avg_mins <- ifelse(data$night_calls == 0, -1, data$night_mins / data$night_calls)
+data$day_avg_mins <- ifelse(
+  data$day_calls == 0, -1, data$day_mins / data$day_calls
+  )
+data$eve_avg_mins <- ifelse(
+  data$eve_calls == 0, -1, data$eve_mins / data$eve_calls
+  )
+data$night_avg_mins <- ifelse(
+  data$night_calls == 0, -1, data$night_mins / data$night_calls
+  )
 
 #########################################
 # convert character to factor
 
 vars <- colnames(data)
-catVars <- vars[sapply(data[, vars], class) %in% c('character')]
+catVars <- vars[
+  sapply(data[, vars], class) %in% c('character')
+  ]
 for(v in catVars) {
   data[,v] <- as.factor(data[,v])
 }
@@ -165,14 +181,16 @@ model <- randomForest(
 # Model evaluation: ROC
 
 target = "is_churn"
+train_target = grep(target, colnames(training))
+test_target = grep(target, colnames(testing))
 
 # plot ROC curves for training and testing data
-training_actual <- training[, grep(target, colnames(training))]
+training_actual <- training[, train_target]
 training_predicted <- predict(
-  model, newdata = training[ , - grep(target, colnames(training))], type = "prob")
-testing_actual <- testing[, grep(target, colnames(testing))]
+  model, newdata = training[ , - train_target], type = "prob")
+testing_actual <- testing[, test_target]
 testing_predicted <- predict(
-  model, newdata = testing[ , - grep(target, colnames(testing))], type = "prob")
+  model, newdata = testing[ , - test_target], type = "prob")
 
 par(mfrow = c(1,2))
 par(pty = "s") # square plotting region
@@ -183,7 +201,7 @@ par(mfrow = c(1,1))
 # clean up
 rm(training_actual, training_predicted,
    testing_actual, testing_predicted, target,
-   testing, training)
+   testing, training, train_target, test_target)
 
 #########################################
 # Model evaluation: Top Features
