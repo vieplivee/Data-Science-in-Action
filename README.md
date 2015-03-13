@@ -6,14 +6,10 @@
 
 <img src="graphs/data_science_skills_domain.png" width="500"/>
 
-----
-
 ### Data Science in Action
 
 - Customer churn model
     - [Churn Model Demo in R](src/churn.R)
-
-----
 
 ### Data Munging Toolbox
 
