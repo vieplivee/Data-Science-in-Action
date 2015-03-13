@@ -2,20 +2,25 @@
 
 ----
 
-### What is Data Science
-
-<img src="graphs/data_science_skills_domain.png" width="500"/>
-
 ### Data Science in Action
 
 - Customer churn model
     - [Churn Model Demo in R](src/churn.R)
 
+- Presentationd Deck
+    - [LaTeX](presentation/DS_talk.tex)
+    - [PDF](presentation/DS_talk.pdf)
+
+----
+
+### What is Data Science
+
+<img src="graphs/data_science_skills_domain.png" width="500"/>
+
+
 ### Data Munging Toolbox
 
 <img src="graphs/data_tools.png" width="500"/>
-
-----
 
 ### Data Visualization Toolbox
 
