@@ -1,5 +1,5 @@
 ##################################################################################
-### Step 1: prepare space                                                      ###
+### Step 1: Load Packages
 
 # clean up space
 rm(list = ls(all = TRUE))
@@ -17,10 +17,7 @@ lapply(packages, require, character.only = T)
 rm(packages)
 
 ##################################################################################
-### Step 2: read data and quickly explore                                      ###
-
-# reproducible example
-set.seed(1)
+### Step 2: Read Data and Prepare Data                                         ###
 
 # read data
 rawdata <- read.csv("../data/churn/churn_fix.csv", header = T)
@@ -32,11 +29,23 @@ str(rawdata)
 data <- rawdata
 
 #########################################
-# correlation matrix
+# Feature Construction: average mins per call
+
+data$day_avg_mins <- ifelse(
+  data$day_calls == 0, -1, data$day_mins / data$day_calls
+  )
+data$eve_avg_mins <- ifelse(
+  data$eve_calls == 0, -1, data$eve_mins / data$eve_calls
+  )
+data$night_avg_mins <- ifelse(
+  data$night_calls == 0, -1, data$night_mins / data$night_calls
+  )
+
+#########################################
+# Correlation Matrix
 
 # creating a copy for transforming columns to numeric
-num_data <- data
-vars <- colnames(num_data)
+num_data <- data; vars <- colnames(num_data)
 catVars <- vars[
   sapply(num_data[, vars], class) %in% c('factor','character')
   ]
@@ -48,8 +57,7 @@ for(v in catVars) {
 cor_data <- melt(cor(num_data))
 names(cor_data) <- c('v1', 'v2', 'correlation')
 cor_data <- mutate(cor_data, correlation = round(correlation, 2))
-str(cor_data)
-head(cor_data)
+str(cor_data); head(cor_data) # check correlation data
 
 # plot correlation
 ggplot(cor_data, aes(v1, v2, fill = correlation, label = correlation)) + 
@@ -99,19 +107,6 @@ data <- data[, setdiff(colnames(data), cols_remove)]
 rm(cols_remove)
 
 #########################################
-# get average mins per call
-
-data$day_avg_mins <- ifelse(
-  data$day_calls == 0, -1, data$day_mins / data$day_calls
-  )
-data$eve_avg_mins <- ifelse(
-  data$eve_calls == 0, -1, data$eve_mins / data$eve_calls
-  )
-data$night_avg_mins <- ifelse(
-  data$night_calls == 0, -1, data$night_mins / data$night_calls
-  )
-
-#########################################
 # convert character to factor
 
 vars <- colnames(data)
@@ -148,8 +143,8 @@ splitdf <- function(dataframe, seed = NULL, ratio = 0.5) {
   testset <- dataframe[-trainindex, ]
   list(trainset=trainset,testset=testset)
 }
-getseed = as.integer(runif(1, 1, 100000))
-print(paste("Seeding for split:", getseed))
+getseed = as.integer(runif(1, 1, 100000)); # random seeding
+print(paste("Seeding for split:", getseed)) # record the seed for reproducibility
 
 # split data by 2:1 ratio since the data set is small
 splits <- splitdf(data, seed = getseed, ratio = 2/3)
@@ -219,3 +214,4 @@ varImpPlot(
   ,n.var = 10
   ,main = "Top Features Type 2")
 par(mfrow = c(1,1))
+
