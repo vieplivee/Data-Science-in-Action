@@ -4,25 +4,25 @@
 
 ### Data Science in Action
 
-- Customer churn model
-    - [Churn Model Demo in R](src/churn.R)
-
 - Presentationd Deck
     - [LaTeX](presentation/DS_talk.tex)
     - [PDF](presentation/DS_talk.pdf)
 
+- Demo in R: Customer churn model
+    - [Churn Model Demo in R](src/churn.R)
+
 ----
 
-### What is Data Science
+##### What is Data Science
 
 <img src="graphs/data_science_skills_domain.png" width="500"/>
 
 
-### Data Munging Toolbox
+##### Data Munging Toolbox
 
 <img src="graphs/data_tools.png" width="500"/>
 
-### Data Visualization Toolbox
+##### Data Visualization Toolbox
 
 <img src="graphs/data_visualization_tools.png" width="500"/>
 
