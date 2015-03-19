@@ -6,14 +6,17 @@
 \usepackage{graphicx}
 \usepackage{helvet}
 \usetheme{Szeged}
-\usecolortheme{seagull}
+\usecolortheme{wolverine}
 \usefonttheme{professionalfonts}
 \useoutertheme{miniframes}
 \useoutertheme{smoothbars}
 
-\title[Data Science]{Data Science in Action}
+\usepackage{beamerthemeshadow}
+\setbeamertemplate{navigation symbols}{}
+
+\title[Data Science In Action]{Data Science in Action}
 \author[JL]{Ji Li}
-\institute[DS]{Data Scientist}
+\institute[Ji Li]{Data Scientist}
 \date{March 25, 2015}
 
 \begin{document}
@@ -43,8 +46,41 @@
       \end{center}
     \end{frame}
 
-  \subsection{Skills and Domain Expertise}
+  \subsection{Data Munging}
   
+   \begin{frame}{Data Munging}
+     \begin{columns}
+       \begin{column}[T]{0.48\textwidth}
+         \begin{block}{Data Munging}
+           ..also called Data Wrangling, Data Preparation, usually means some or all of the following tasks that mark the beginning of a data science project:
+           \begin{itemize}
+             \item<1-> ETL
+             \item<2-> Data Integration
+             \item<3-> Data Cleansing
+           \end{itemize}
+         \end{block}
+       \end{column}
+       \begin{column}[T]{0.48\textwidth}
+         \begin{overprint}
+           \onslide<1>
+             \begin{alertblock}{ETL}
+               ETL is the process of extract, transform, and load data. - For one thing, we might want to acquire data from external sources to assist with data mining. On the other hand, there are often multiple data sources internally.
+             \end{alertblock}
+           \onslide <2>
+             \begin{alertblock}{Data Integration}
+               After ETL, we need to combine data from disparate sources into meaningful and valuable information.
+             \end{alertblock}
+           \onslide <3>
+             \begin{alertblock}{Data Cleansing}
+               Data cleansing, also called data scrubbing, is the process of amending or removing data in a database that is incorrect, incomplete, improperly formatted, or duplicated.
+             \end{alertblock}
+         \end{overprint}
+       \end{column}   
+     \end{columns}
+   \end{frame}
+
+  \subsection{Skills and Domain Expertise}
+
     \begin{frame}{Domain expertise of a data scientist}
       \begin{center}
         \includegraphics[width=300pt]{../graphs/data_science_domain}
@@ -63,74 +99,44 @@
       \end{center}
     \end{frame}
 
-\section{Data Science in Action}
+\section{Churn Model}
 
-  \subsection{Churn Model: Business Understanding}
+  \subsection{Business Understanding}
 
-      \begin{frame}{The quest}
-        \setbeamercovered{transparent}
-        \begin{block}{Definition of a churned customer}
-        \end{block}
-        \pause
+      \begin{frame}{The Goal}
         \begin{block}{Goal}
             \begin{itemize}
               \item To predict which customers will churn.
             \end{itemize}
         \end{block}
-        \pause
-        \begin{block}{Data sets}
-          \begin{itemize}
-            \item Customer renew data.
-            \item Customer support data.
-            \item Customer account and demographic data.
-            \item Customer usage data.
-          \end{itemize}
+        \begin{block}{Workflow}
+          \begin{center}
+            \includegraphics[height=80pt]{../graphs/churnmodel_workflow}
+          \end{center}
         \end{block}
       \end{frame}
 
     \begin{frame}{Customer renewal data}
-        \begin{columns}[c]
-          \column{.5\textwidth}
-          \begin{block}{Raw data}
-            \begin{center}
-              \includegraphics[height=100pt]{../graphs/dataset_customer_renew}
-            \end{center}
-          \end{block}
-          \column{.5\textwidth}
-          \begin{block}{Renewal Schedule}
-            \begin{center}
-              \includegraphics[height=100pt]{../graphs/dataset_renewal_schedule}
-            \end{center}
-          \end{block}
-        \end{columns}
+      \begin{center}
+        \includegraphics[height=180pt]{../graphs/datasets_customer_renew}
+      \end{center}
     \end{frame}
 
     \begin{frame}{Customer service call data}
-        \begin{columns}[c]
-          \column{.5\textwidth}
-          \begin{block}{Raw data}
-            \begin{center}
-              \includegraphics[height=100pt]{../graphs/dataset_customer_support}
-            \end{center}
-          \end{block}
-          \column{.5\textwidth}
-          \begin{block}{Cumulative distribution}
-            \begin{center}
-              \includegraphics[height=100pt]{../graphs/dataset_cust_call_chart}
-            \end{center}
-          \end{block}
-        \end{columns}
+      \begin{center}
+        \includegraphics[height=180pt]{../graphs/datasets_cust_call}
+      \end{center}
     \end{frame}
 
     \begin{frame}{Customer plan type and demographic}
         \begin{center}
-          \includegraphics[height=120pt]{../graphs/dataset_customer_account}
+          \includegraphics[height=150pt]{../graphs/datasets_customer_account}
         \end{center}
     \end{frame}
 
     \begin{frame}{Customer usage data}
         \begin{center}
-          \includegraphics[height=100pt]{../graphs/dataset_customer_usage}
+          \includegraphics[height=150pt]{../graphs/datasets_customer_usage}
         \end{center}
     \end{frame}
 
@@ -140,7 +146,7 @@
       \end{center}
     \end{frame}
 
-  \subsection{Churn Model: Demo in R}
+  \subsection{Demo in R}
 
     \begin{frame}{R Script}
         \begin{center}
@@ -148,7 +154,7 @@
         \end{center}
     \end{frame}
     
-  \subsection{Churn Model: Top Features}
+  \subsection{Top Features}
   
     \begin{frame}{Variable importance from random forest}
         \begin{center}
@@ -174,7 +180,7 @@
       \end{center}
     \end{frame}
 
-  \subsection{Churn Model: Prescriptive Analysis}
+  \subsection{Prescriptive Analysis}
 
     \begin{frame}{Churn analysis}
       \begin{center}
@@ -188,6 +194,8 @@
       \end{center}
     \end{frame}
 
+\section{Yesware Email Analysis}
+
   \subsection{Email Analysis}
 
     \begin{frame}{When to send an email}
@@ -197,41 +205,24 @@
       {\footnotesize Best time to send email: \url{http://goo.gl/lVdD31}}
     \end{frame}
 
-    \begin{frame}{D3 Visualization: Subject Line Analysis}
+    \begin{frame}{D3 Visualization: Subject Line Keywords}
       \begin{center}
         \includegraphics[height=180pt]{../graphs/email_analysis_subject_line}
       \end{center}    
       {\footnotesize Subject line key words: \url{http://goo.gl/PK9xhO}}
     \end{frame}
 
-\section{Data Scientist Toolbox}
+\section{Data Science in the Industry}
 
-  \subsection{Data Scientist Toolbox}
+  \subsection{Data Science Toolbox}
   
     \begin{frame}{From academia to industry}
       \begin{center}
         \includegraphics[width=300pt]{../graphs/academia_industry}
       \end{center}
     \end{frame}
-
-    \begin{frame}{Why do we need a toolbox?}
-      \begin{center}
-        \includegraphics[width=280pt]{../graphs/industry_swiss_army_knife}
-      \end{center}
-    \end{frame}
     
-    \begin{frame}{Python and R for data science}
-      \begin{center}
-        \includegraphics[width=250pt]{../graphs/python_r}
-      \end{center}
-      {\footnotesize
-        iPython \url{http://goo.gl/zT4uPE}
-        --- 
-        RStudio \url{http://www.rstudio.com/}
-      }
-    \end{frame}
-
-    \begin{frame}{Data manipulation tools}
+    \begin{frame}{Tools that help you do data science fast}
       \begin{center}
          \includegraphics[width=250pt]{../graphs/data_tools}
       \end{center}
@@ -245,9 +236,50 @@
         D3 \url{http://d3js.org/}
       }
     \end{frame}
-     
+
+  \subsection{Data Democracy and Big Data}
+
+    \begin{frame}{Data Democracy}
+          \begin{center}
+             \includegraphics[width=250pt]{../graphs/data_democratization}
+          \end{center}
+        {\footnotesize \url{http://www.narrativescience.com/blog/democratization-data/}}
+    \end{frame}
+
+    \begin{frame}{Big Data}
+      \begin{columns}
+        \begin{column}[T]{0.48\textwidth}
+          \begin{block}{Big Data Ecosystem}
+            \begin{itemize}
+              \item<1-> Hadoop - file system
+              \item<2-> Spark - computing system
+              \item<3-> Spark Stack
+                \begin{itemize}
+                  \item<4-> Spark SQL - Data Munging
+                  \item<4-> Spark Streaming - Real Time Processing
+                  \item<4-> MLlib - Machine Learning
+                  \item<4-> GraphX - Visualization
+                \end{itemize}
+            \end{itemize}
+          \end{block}
+        \end{column}
+        \begin{column}[T]{0.48\textwidth}
+          \begin{overprint}
+            \onslide<1>
+            \includegraphics[width=160pt]{../graphs/logo/hadoop}
+            \onslide<2>
+            \includegraphics[width=160pt]{../graphs/logo/spark}
+            \onslide<3->
+            \includegraphics[width=160pt]{../graphs/logo/spark-stack}
+            
+            {\footnotesize \url{https://spark.apache.org/}}
+          \end{overprint}
+        \end{column}   
+      \end{columns}
+    \end{frame}
+
     \begin{frame}{Thank You}
-      \centerline{\large Please send your questions and feedbacks to me!}
+      \centerline{\large Please send your questions and feedback to me!}
     \end{frame}
 
 \end{document}
