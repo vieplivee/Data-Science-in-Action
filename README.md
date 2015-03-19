@@ -5,8 +5,8 @@
 ### Data Science in Action
 
 - Presentationd Deck
-    - [LaTeX](presentation/DS_talk.tex)
-    - [PDF](presentation/DS_talk.pdf)
+    - [LaTeX](presentation/Data_Science_in_Action.tex)
+    - [PDF](presentation/Data_Science_in_Action.tex.pdf)
 
 - Demo in R: Customer churn model
     - [Churn Model Demo in R](src/churn.R)
