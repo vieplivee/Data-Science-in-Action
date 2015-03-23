@@ -11,12 +11,13 @@
 - Demo in R: Customer churn model
     - [Churn Model Demo in R](src/churn.R)
 
+### [Data Science Articles](articles/README.md)
+
 ----
 
 ##### What is Data Science
 
 <img src="graphs/data_science_skills_domain.png" width="500"/>
-
 
 ##### Data Munging Toolbox
 
@@ -29,4 +30,4 @@
 ----
 
 - Created: 03.12.2015
-- Last Updated: 03.18.2015
+- Last Updated: 03.22.2015
