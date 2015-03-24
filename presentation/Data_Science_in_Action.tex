@@ -6,7 +6,7 @@
 \usepackage{graphicx}
 \usepackage{helvet}
 \usetheme{Szeged}
-\usecolortheme{wolverine}
+%\usecolortheme{wolverine}
 \usefonttheme{professionalfonts}
 \useoutertheme{miniframes}
 \useoutertheme{smoothbars}
@@ -18,6 +18,9 @@
 \author[JL]{Ji Li}
 \institute[Ji Li]{Data Scientist}
 \date{March 25, 2015}
+
+\setbeamercolor{local structure}{parent=normal text}
+\addtobeamertemplate{block begin}{\setbeamercolor{local structure}{parent=structure}}{}
 
 \begin{document}
 
@@ -46,31 +49,62 @@
       \end{center}
     \end{frame}
 
-  \subsection{Data Munging}
+  \subsection{Data Science Workflow}
+
+    \begin{frame}{Domain expertise guides the workflow}
+      \begin{columns}
+        \begin{column}{0.38\textwidth}
+         \begin{block}{Data Science Workflow}
+          \smallskip
+           \begin{itemize}
+             \item Data Munging
+             \smallskip
+             \item Data Mining
+             \smallskip
+             \item Delivery of actionable Insights
+           \end{itemize}
+         \end{block}
+        \end{column}
+        \begin{column}{0.6\textwidth}
+          \begin{center}
+            \includegraphics[height=180pt]{../graphs/data_science_domain}
+          \end{center}
+        \end{column}
+      \end{columns}
+    \end{frame}
   
    \begin{frame}{Data Munging}
      \begin{columns}
        \begin{column}[T]{0.48\textwidth}
          \begin{block}{Data Munging}
-           ..also called Data Wrangling, Data Preparation, usually means some or all of the following tasks that mark the beginning of a data science project:
+          Data Munging means some or all of the following tasks:
+          \smallskip
            \begin{itemize}
-             \item<1-> ETL
-             \item<2-> Data Integration
-             \item<3-> Data Cleansing
+             \item<1-> \alert<2>{ETL}
+             \smallskip
+             \item<1-> \alert<3>{Data Integration}
+             \smallskip
+             \item<1-> \alert<4>{Data Cleansing}
            \end{itemize}
          \end{block}
        \end{column}
        \begin{column}[T]{0.48\textwidth}
          \begin{overprint}
-           \onslide<1>
+           \onslide<2>
              \begin{alertblock}{ETL}
-               ETL is the process of extract, transform, and load data. - For one thing, we might want to acquire data from external sources to assist with data mining. On the other hand, there are often multiple data sources internally.
-             \end{alertblock}
-           \onslide <2>
-             \begin{alertblock}{Data Integration}
-               After ETL, we need to combine data from disparate sources into meaningful and valuable information.
+               The process of extract, transform, and load data.
+               \smallskip
+                 \begin{itemize}
+                   \item To acquire data from external sources. 
+                   \smallskip
+                   \item To migrate multiple data sources internally.
+                 \end{itemize}
              \end{alertblock}
            \onslide <3>
+             \begin{alertblock}{Data Integration}
+               To combine data from disparate sources into meaningful and valuable information.
+             \end{alertblock}
+           \onslide <4>
              \begin{alertblock}{Data Cleansing}
                Data cleansing, also called data scrubbing, is the process of amending or removing data in a database that is incorrect, incomplete, improperly formatted, or duplicated.
              \end{alertblock}
@@ -79,18 +113,74 @@
      \end{columns}
    \end{frame}
 
-  \subsection{Skills and Domain Expertise}
-
-    \begin{frame}{Domain expertise of a data scientist}
-      \begin{center}
-        \includegraphics[width=300pt]{../graphs/data_science_domain}
-      \end{center}
-    \end{frame}
+   \begin{frame}{Data Mining}
+     \begin{columns}
+       \begin{column}[T]{0.48\textwidth}
+         \begin{block}{Data Mining}
+          Data Mining is the key step to turn data into insights:
+          \smallskip
+           \begin{itemize}
+             \item<1-> \alert<2>{Data Exploration}
+             \smallskip
+             \item<1-> \alert<3>{Machine Learning}
+             \smallskip
+             \item<1-> \alert<4>{Model Evaluation}
+           \end{itemize}
+         \end{block}
+       \end{column}
+       \begin{column}[T]{0.48\textwidth}
+         \begin{overprint}
+           \onslide<2>
+             \begin{alertblock}{Data Exploration}
+               The process of visually examine and explore the data.
+               \smallskip
+                 \begin{itemize}
+                   \item To gain basic understanding of the data. 
+                   \item To identify relationships between different attributes.
+                   \item To answer basic questions using data.
+                 \end{itemize}
+             \end{alertblock}
+           \onslide <3>
+             \begin{alertblock}{Machine Learning}
+               To obtain statistical models, we usually need to go through multiple steps like 
+               the following:
+               \smallskip
+                 \begin{enumerate}
+                   \item Construct new features.
+                   \item Remove redundant features.
+                   \item Choose one or more suitable machine learning algorithm.
+                 \end{enumerate}
+             \end{alertblock}
+           \onslide <4>
+             \begin{alertblock}{Model Evaluation}
+               Model evaluation is often used not only to select the best model from 
+               the set of models, but also to get ready for producing actionable insights.
+             \end{alertblock}
+         \end{overprint}
+       \end{column}   
+     \end{columns}
+   \end{frame}
 
     \begin{frame}{Skills of a data scientist}
-      \begin{center}
-        \includegraphics[width=300pt]{../graphs/data_science_skills}
-      \end{center}
+      \begin{columns}
+        \begin{column}{0.38\textwidth}
+         \begin{block}{Data Science skills}
+          \smallskip
+           \begin{itemize}
+             \item Programming
+             \smallskip
+             \item Statistics
+             \smallskip
+             \item Visualization
+           \end{itemize}
+         \end{block}
+        \end{column}
+        \begin{column}{0.6\textwidth}
+          \begin{center}
+            \includegraphics[height=180pt]{../graphs/data_science_skills}
+          \end{center}
+        \end{column}
+      \end{columns}
     \end{frame}
 
     \begin{frame}{Doing data science}
@@ -157,9 +247,31 @@
   \subsection{Top Features}
   
     \begin{frame}{Variable importance from random forest}
-        \begin{center}
-          \includegraphics[width=300pt]{../graphs/rf_var_importance}
-        \end{center}
+      \begin{columns}
+        \begin{column}{0.38\textwidth}
+         \begin{block}{Top Features}
+          \smallskip
+           \begin{itemize}
+             \item cust surv calls
+             \smallskip
+             \item is intl plan
+             \smallskip
+             \item day mins
+           \end{itemize}
+         \end{block}
+        \end{column}
+        \begin{column}{0.6\textwidth}
+          \begin{center}
+            \includegraphics[height=180pt]{../graphs/rf_var_importance}
+          \end{center}
+        \end{column}
+      \end{columns}
+    \end{frame}
+
+    \begin{frame}{Top feature - customer service calls}
+      \begin{center}
+        \includegraphics[width=280pt]{../graphs/top_var_cust_surv}
+      \end{center}
     \end{frame}
 
     \begin{frame}{Top feature - customer service calls}
@@ -199,23 +311,36 @@
   \subsection{Email Analysis}
 
     \begin{frame}{When to send an email}
-          \begin{block}{To optimize reply rate}
+          \begin{block}{To Optimize Email Reply}
             \begin{itemize}
-              \item<1-> Top feature: Sent Hour
-              \item<2-> Topo feature: Sent Weekday
+              \item<1-> Yesware users want to know how to get more replies.
+              \item<3-> Emails Sent and Reply Rate by Sent Hour
+              \item<4-> Emails Sent and Reply Rate by Sent Weekday
             \end{itemize}
           \end{block}
           \begin{overprint}
-            \onslide<1>
+            \onslide<2>
+              \begin{alertblock}{An Email Reply Model}
+                \begin{enumerate}
+                  \item Construct features from the email data.
+                  \item Create a model to predict the reply on each email.
+                  \item Identify some top features that contributed most to the reply:
+                    \begin{itemize}
+                      \item Sent Hour
+                      \item Sent Weekday
+                    \end{itemize}
+                \end{enumerate}
+              \end{alertblock}
+            \onslide<3>
             \begin{center}
               \includegraphics[height=140pt]{../graphs/email_analysis_sent_hour}
             \end{center}
-            \onslide<2>
+            \onslide<4>
             \begin{center}
               \includegraphics[height=140pt]{../graphs/email_analysis_sent_weekday}
             \end{center}
           \end{overprint}
-     \centerline{\footnotesize Best time to send email: \url{http://goo.gl/lVdD31}}
+      \centerline{\footnotesize Best time to send email: \url{http://goo.gl/lVdD31}}
     \end{frame}
 
     \begin{frame}{D3 Visualization: Subject Line Keywords}
@@ -229,13 +354,13 @@
 
   \subsection{Data Science Toolbox}
   
-    \begin{frame}{From academia to industry}
+    \begin{frame}{Why do we need a toolbox?}
       \begin{center}
         \includegraphics[width=300pt]{../graphs/academia_industry}
       \end{center}
     \end{frame}
     
-    \begin{frame}{Tools that help you do data science fast}
+    \begin{frame}{Tools that helped me do data science fast}
       \begin{center}
          \includegraphics[width=250pt]{../graphs/data_tools}
       \end{center}
@@ -248,14 +373,7 @@
       \centerline{\footnotesize D3: \url{http://d3js.org/}}
     \end{frame}
 
-  \subsection{Data Democracy and Big Data}
-
-    \begin{frame}{Data Democracy}
-          \begin{center}
-             \includegraphics[width=250pt]{../graphs/data_democratization}
-          \end{center}
-        \centerline{\footnotesize Article: \url{http://goo.gl/ngpUQf}}
-    \end{frame}
+  \subsection{Big Data}
 
     \begin{frame}{Big Data}
       \begin{columns}

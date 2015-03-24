@@ -1,28 +1,8 @@
 # Data-Science-Articles
 
-----
 
-### Overview
-
-- [What is data science](overview/what_is_data_science.md)
-
-----
-
-### Career
-
-- [How I became a data scientist](career/how_i_became_a_data_scientist.md)
-
-----
-
-### Programming
-
-----
-
-### Visualization
-
-----
-
-### Books
+- #### [What is data science](overview/what_is_data_science.md)
+- #### [How I became a data scientist](career/how_i_became_a_data_scientist.md)
 
 ----
 

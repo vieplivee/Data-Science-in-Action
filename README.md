@@ -6,7 +6,7 @@
 
 - Presentationd Deck
     - [LaTeX](presentation/Data_Science_in_Action.tex)
-    - [PDF](presentation/Data_Science_in_Action.tex.pdf)
+    - [PDF](presentation/Data_Science_in_Action.pdf)
 
 - Demo in R: Customer churn model
     - [Churn Model Demo in R](src/churn.R)
