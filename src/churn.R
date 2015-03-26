@@ -30,6 +30,8 @@ data$day_avg_mins <- ifelse(data$day_calls == 0, -1, data$day_mins / data$day_ca
 data$eve_avg_mins <- ifelse(data$eve_calls == 0, -1, data$eve_mins / data$eve_calls)
 data$night_avg_mins <- ifelse(data$night_calls == 0, -1, data$night_mins / data$night_calls)
 
+str(data)
+
 #########################################
 # Correlation Matrix
 
@@ -41,7 +43,7 @@ for(v in catVars) {num_data[, v] <- as.numeric(as.factor(num_data[,v]))}
 # correlation data
 cor_data <- melt(cor(num_data))
 names(cor_data) <- c('v1', 'v2', 'correlation')
-cor_data <- mutate(cor_data, correlation = round(correlation, 1))
+cor_data <- mutate(cor_data, correlation = round(correlation, 2))
 
 # check correlation data
 str(cor_data)
@@ -97,18 +99,7 @@ data <- data[, setdiff(colnames(data), cols_remove)]
 # clean up
 rm(cols_remove)
 
-#########################################
-# convert character to factor
-
-vars <- colnames(data)
-catVars <- vars[sapply(data[, vars], class) %in% c('character')]
-for(v in catVars) {data[,v] <- as.factor(data[,v])}
-
-# check data
 str(data)
-
-# clean up
-rm(vars, catVars, v)
 
 #########################################
 
@@ -159,7 +150,7 @@ model <- randomForest(
 )
 
 #########################################
-# Model evaluation: ROC
+# Model evaluation: ROC - Receiver operating characteristic
 
 target = "is_churn"
 target_col = grep(target, colnames(training))
@@ -172,10 +163,6 @@ testing_actual <- testing[, target_col]
 testing_predicted <- predict(
   model, newdata = testing[ , - target_col], type = "prob")
 
-# check propensity scores on the testing data
-str(testing_predicted)
-head(testing_predicted)
-
 # plot ROC
 par(mfrow = c(1,2))
 par(pty = "s") # square plotting region
@@ -186,7 +173,7 @@ par(mfrow = c(1,1))
 # clean up
 rm(training_actual, training_predicted,
    testing_actual, testing_predicted, target,
-   testing, training, train_target, test_target)
+   testing, training, target_col)
 
 #########################################
 # Model evaluation: Top Features
